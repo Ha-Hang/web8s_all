@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trung Tâm Tư Vấn Du Học & Xuất Khẩu Lao Động</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE MATERIAL ICONS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        #message { margin-top: 10px; font-size: 16px; }
+    </style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    📞 Hotline: 0822.314.555  
+    <a href="#dangky">Đăng ký tìm hiểu</a>
+</div>
+
+<!-- MENU -->
+<nav>
+    <ul>
+        <li><a>Trang chủ</a></li>
+
+        <li>
+            <a onclick="toggleMenu('duhocMenu','arrow1')">Du học 
+                <span id="arrow1" class="arrow">▶</span>
+            </a>
+
+            <ul id="duhocMenu" class="submenu">
+
+                <li>
+                    <a onclick="toggleNested(event,'ducNested','arrowDuc')">
+                        Du học nghề Đức 
+                        <span id="arrowDuc" class="arrow">▶</span>
+                    </a>
+                    <ul id="ducNested" class="nested">
+                        <li><a>Điều dưỡng</a></li>
+                        <li><a>Nhà hàng – KS</a></li>
+                        <li><a>Điện – Cơ khí</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a onclick="toggleNested(event,'nhatNested','arrowNhat')">
+                        Du học Nhật Bản 
+                        <span id="arrowNhat" class="arrow">▶</span>
+                    </a>
+                    <ul id="nhatNested" class="nested">
+                        <li><a>THPT</a></li>
+                        <li><a>CĐ – Đại học</a></li>
+                        <li><a>Vừa học vừa làm</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a onclick="toggleNested(event,'hanNested','arrowHan')">
+                        Du học Hàn Quốc 
+                        <span id="arrowHan" class="arrow">▶</span>
+                    </a>
+                    <ul id="hanNested" class="nested">
+                        <li><a>Trường tiếng</a></li>
+                        <li><a>Đại học</a></li>
+                        <li><a>Cao học</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><a>Xuất khẩu lao động</a></li>
+        <li><a>Hoạt động</a></li>
+        <li><a>Liên hệ</a></li>
+
+        <li><a href="#dangky" style="color:#ff6600; font-weight:bold;">Đăng ký</a></li>
+
+        <li class="search-box">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm..." onkeyup="searchMenu()">
+        </li>
+    </ul>
+</nav>
+
+<!-- BANNER -->
+<div class="banner">
+    TƯ VẤN DU HỌC & XUẤT KHẨU LAO ĐỘNG
+</div>
+
+<!-- TWO-COLUMN SECTION -->
+<section class="two-column-section">
+    <div class="left-slider">
+        <div class="slider-container">
+            <span class="slider-btn prev material-symbols-outlined">chevron_left</span>
+
+            <div class="slider">
+                <img src="https://cdn-images.vtv.vn/562122370168008704/2023/7/26/untitled-1690344019340844974097.png" class="active">
+                <img src="https://icogroup.vn/vnt_upload/weblink/banner_chu_04.jpg">
+                <img src="https://www.icogroup.vn/vnt_upload/news/02_2025/ICOGROUP_TUYEN_DUNG_23.jpg">
+            </div>
+
+            <span class="slider-btn next material-symbols-outlined">chevron_right</span>
+        </div>
+    </div>
+
+    <div class="right-text">
+        <h2>Chương trình Du học</h2>
+        <p>Hỗ trợ các bạn trẻ đến Nhật Bản – Hàn Quốc – Đài Loan – Đức một cách dễ dàng và uy tín nhất.</p>
+
+        <h2>Chương trình Xuất Khẩu Lao Động</h2>
+        <p>Cam kết việc làm ổn định, lương cao, hợp đồng rõ ràng tại Nhật – Hàn – Đài Loan – Châu Âu.</p>
+
+        <h2>Hoạt động nổi bật</h2>
+        <p>Các buổi hội thảo, hướng nghiệp, định hướng hồ sơ và hoạt động ngoại khóa thường xuyên.</p>
+    </div>
+</section>
+
+<!-- FORM -->
+<div class="form-container" id="dangky">
+    <h3>ĐĂNG KÝ TƯ VẤN NHANH</h3>
+    <form id="userRegistrationForm">
+
+        <label>Họ và Tên:</label>
+        <input type="text" id="ho_ten" required>
+
+        <label>Năm Sinh:</label>
+        <input type="number" id="nam_sinh" required>
+
+        <label>Địa Chỉ:</label>
+        <input type="text" id="dia_chi" required>
+
+        <label>Chương Trình Quan Tâm:</label>
+        <select id="chuong_trinh" required>
+            <option>Du học Nhật Bản</option>
+            <option>Du học Hàn Quốc</option>
+            <option>Xuất khẩu lao động</option>
+            <option>Đào tạo ngoại ngữ</option>
+        </select>
+
+        <label>Quốc Gia Muốn Đến:</label>
+        <select id="quoc_gia" onchange="toggleQuocGiaKhac()">
+            <option value="Nhật Bản">Nhật Bản</option>
+            <option value="Hàn Quốc">Hàn Quốc</option>
+            <option value="Đài Loan">Đài Loan</option>
+            <option value="Đức">Đức</option>
+            <option value="Khác">Khác</option>
+        </select>
+
+        <div id="quoc_gia_khac_box" style="display:none;">
+            <label>Nhập quốc gia khác:</label>
+            <input type="text" id="quoc_gia_khac" placeholder="Không bắt buộc">
+        </div>
+
+        <label>Số Điện Thoại:</label>
+        <input type="tel" id="sdt" required>
+
+        <button type="submit">GỬI THÔNG TIN</button>
+
+        <p id="message"></p>
+    </form>
+</div>
+
+<!-- THÔNG TIN -->
+<section style="background:#002b6f; color:white; padding:40px 20px; margin-top:40px;">
+    <h2 style="margin-top:0;">CÔNG TY CỔ PHẦN NHÂN LỰC QUỐC TẾ ICO</h2>
+
+    <p><strong>📌 Địa chỉ:</strong><br>
+        Số 360, đường Phan Đình Phùng, tỉnh Thái Nguyên.
+    </p>
+
+    <p><strong>📞 Hotline:</strong> 0822.314.555</p>
+
+    <p><strong>🌐 Liên hệ:</strong>
+        Facebook | Zalo | Website
+    </p>
+</section>
+
+<!-- SCRIPT GỐC -->
+<script src="scrip.js"></script>
+
+<!-- ⭐ THÊM SCRIPT KIỂM TRA GỬI DỮ LIỆU API ⭐ -->
+<script>
+document.getElementById('userRegistrationForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const messageDisplay = document.getElementById('message');
+    messageDisplay.textContent = 'Đang gửi thông tin...';
+    messageDisplay.style.color = '#0f75bd';
+
+    const data = {
+        ho_ten: document.getElementById('ho_ten').value,
+        nam_sinh: document.getElementById('nam_sinh').value,
+        dia_chi: document.getElementById('dia_chi').value,
+        chuong_trinh: document.getElementById('chuong_trinh').value,
+        quoc_gia: document.getElementById('quoc_gia').value,
+        sdt: document.getElementById('sdt').value
+    };
+
+    const apiUrl = 'http://localhost/web8s/backend_api/insert.php';
+
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('HTTP Error ' + response.status);
+        return response.json();
+    })
+    .then(apiResult => {
+        if (apiResult.status === true) {
+            messageDisplay.textContent = '✅ Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.';
+            messageDisplay.style.color = 'green';
+            event.target.reset();
+        } else {
+            messageDisplay.textContent = '❌ Lỗi: ' + apiResult.message;
+            messageDisplay.style.color = 'red';
+        }
+    })
+    .catch(error => {
+        messageDisplay.textContent = '❌ Không thể kết nối đến máy chủ. Kiểm tra Apache & MySQL.';
+        messageDisplay.style.color = 'red';
+        console.error(error);
+    });
+});
+</script>
+
+</body>
+<?php
+// --- KHỐI ĐỌC DỮ LIỆU NỘI DUNG TỪ DATABASE ---
+// Điều chỉnh đường dẫn nếu db_config.php không nằm cùng cấp
+include '../backend_api/db_config.php';
+
+// Mảng chứa toàn bộ nội dung {key: value}
+$content = []; 
+
+if ($conn) {
+    // 241: Sử dụng biến $content_table (được include từ db_config.php)
+    $sql = "SELECT section_key, content_value FROM $content_table";
+
+    // 242: Thực thi query trên đối tượng $conn
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $content[$row['section_key']] = $row['content_value'];
+        }
+    }
+    $conn->close(); 
+}
+?>
+</html>
