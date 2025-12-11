@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin - ICOGroup</title>
+    <link rel="stylesheet" href="loginadmin.css"> 
+    
+</head>
+<body>
+    <div class="login-box">
+        <h2>Đăng Nhập Quản Trị</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Tên người dùng:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" required>
+            </div>
+            <p id="login-error">Tên người dùng hoặc mật khẩu không đúng!</p>
+            <button type="submit" class="login-button">Đăng Nhập</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('login-error');
+
+            // THÔNG TIN TÀI KHOẢN ADMIN MẪU (DÙNG TRONG THỬ NGHIỆM FRONT-END)
+            const ADMIN_USER = 'admin';
+            const ADMIN_PASS = '123456'; 
+
+            if (username === ADMIN_USER && password === ADMIN_PASS) {
+                // Đăng nhập thành công
+                localStorage.setItem('adminLoggedIn', 'true'); // Lưu trạng thái
+                window.location.href = 'admin.html'; // Chuyển hướng
+            } else {
+                // Đăng nhập thất bại
+                errorElement.style.display = 'block';
+                document.getElementById('password').value = ''; // Xóa mật khẩu đã nhập
+            }
+        });
+    </script>
+</body>
+</html>

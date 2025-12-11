@@ -1,0 +1,233 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+/* MATERIAL ICON FIX */
+.material-symbols-outlined {
+    font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 48;
+    user-select:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* TOP BAR */
+.top-bar{
+    width:100%;
+    background:#0f75bd;
+    color:#fff;
+    padding:12px 0;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+.top-bar a{
+    color:rgb(255, 64, 0);
+    margin-left:20px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:22px;
+}
+
+/* MENU */
+nav{
+    background:#ffffff;
+    box-shadow:0 2px 10px #00000020;
+}
+nav ul{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 0;
+    gap:40px;
+    font-size:18px;
+}
+nav ul li{
+    position:relative;
+}
+nav ul li a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+nav ul li a:hover{
+    color:#0f75bd;
+}
+
+/* ARROW */
+.arrow{
+    transition:0.2s;
+}
+.arrow.open{
+    transform:rotate(90deg);
+}
+
+/* DROPDOWN */
+.submenu, .nested{
+    display:none;
+    position:absolute;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 2px 10px #00000040;
+    padding:10px 0;
+    min-width:240px;
+    z-index:100;
+}
+.submenu{ top:45px; }
+.nested{
+    left:240px;
+    top:0;
+}
+
+/* SEARCH BOX */
+.search-box input{
+    padding:8px 12px;
+    border:1px solid #ccc;
+    border-radius:20px;
+    width:170px;
+    transition:0.3s;
+}
+.search-box input:focus{
+    width:240px;
+    border-color:#0f75bd;
+}
+
+/* BANNER */
+.banner{
+    width:100%;
+    height:350px;
+    background:url('https://duhocxkldthanhdo.vn/Upload/Images/du-hoc-han-quoc-0111.jpg') center/cover;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:40px;
+    font-weight:bold;
+    text-shadow:2px 2px 5px #000;
+}
+
+/* TWO COLUMN SECTION */
+.two-column-section{
+    display:flex;
+    padding:40px 8%;
+    gap:40px;
+}
+
+/* LEFT SLIDER */
+.left-slider{
+    width:50%;
+}
+
+.slider-container{
+    position:relative;
+    width:100%;
+    height:300px;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.slider{
+    display:flex;
+    width:100%;
+    height:100%;
+    transition:transform 0.4s ease;
+}
+
+.slider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    flex-shrink:0;
+}
+
+/* BUTTONS */
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:40px;
+    background:rgba(0,0,0,0.3);
+    color:white;
+    padding:6px;
+    border-radius:50%;
+    cursor:pointer;
+    user-select:none;
+    z-index:5;
+}
+
+.slider-btn.prev{ left:10px; }
+.slider-btn.next{ right:10px; }
+
+.slider-btn:hover{
+    background:rgba(0,0,0,0.6);
+}
+
+/* RIGHT TEXT */
+.right-text{
+    width:50%;
+}
+.right-text h2{
+    color:#0f75bd;
+    margin-bottom:5px;
+}
+.right-text p{
+    margin-bottom:20px;
+    font-size:17px;
+}
+
+/* FORM */
+.form-container{
+    max-width:600px;
+    margin:50px auto;
+    padding:30px;
+    border-radius:10px;
+    background:#fff;
+    box-shadow:0 0 10px #00000020;
+}
+form label{
+    display:block;
+    margin-top:15px;
+}
+form input, form select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+form button{
+    width:100%;
+    padding:12px;
+    background:#0f75bd;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    margin-top:20px;
+    font-size:18px;
+    cursor:pointer;
+}
+form button:hover{
+    background:#095a90;
+}
+
+/* FOOTER */
+footer{
+    margin-top:50px;
+    background:#0f75bd;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+} 
