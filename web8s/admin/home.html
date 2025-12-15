@@ -313,31 +313,41 @@
                     // 4. CHỨC NĂNG XUẤT FILE TXT
                     // ----------------------------------------------------------------------
                     async function exportUsersToTxt() {
-                        showMessage("Đang chuẩn bị file TXT...", false);
 
                         try {
-                            // GỌI API export_to_txt.php
                             const response = await fetch(API_BASE_URL + 'export.php');
+
+                            // KIỂM TRA MÃ TRẠNG THÁI VÀ NỘI DUNG PHẢN HỒI (RẤT QUAN TRỌNG)
+                            if (!response.ok) {
+                                // Nếu mã trạng thái là lỗi (4xx, 5xx), cố gắng đọc phản hồi là text để xem lỗi PHP
+                                const errorText = await response.text();
+                                console.error('Lỗi phản hồi API:', errorText);
+                                // Hiển thị thông báo lỗi chung chung hơn cho người dùng
+                                throw new Error(`Kết nối thành công nhưng API trả về lỗi (${response.status}). Vui lòng kiểm tra Console (Lỗi PHP).`);
+                            }
+
+                            // Cố gắng phân tích phản hồi thành JSON
                             const result = await response.json();
 
-                            if (response.ok && result.status === true && result.file_url) {
+                            if (result.status === true && result.file_url) {
                                 showMessage(`Xuất file thành công! Bắt đầu tải xuống...`, true);
                                 // Tạo link tải xuống tạm thời và kích hoạt click
                                 const fullUrl = API_BASE_URL.replace('/backend_api/', '/') + result.file_url;
                                 const link = document.createElement('a');
                                 link.href = fullUrl;
-                                link.download = result.file_url.split('/').pop(); // Lấy tên file
+                                link.download = result.file_url.split('/').pop();
                                 document.body.appendChild(link);
                                 link.click();
                                 document.body.removeChild(link);
                             } else if (result.message) {
+                                // Trường hợp PHP chạy thành công nhưng không có dữ liệu để xuất
                                 showMessage(`Thông báo: ${result.message}`, true);
                             } else {
                                 throw new Error("Lỗi không xác định khi xuất file.");
                             }
                         } catch (error) {
                             console.error('Lỗi Export:', error);
-                            showMessage(`❌ Lỗi xuất file: ${error.message}`, false);
+                            showMessage(`❌ Lỗi xuất file: ${error.message.includes('JSON') ? 'Lỗi API: Không nhận được phản hồi JSON hợp lệ (Kiểm tra lỗi PHP trên máy chủ).' : error.message}`, false);
                         }
                     }
                     // Tự động tải dữ liệu khi trang được load
@@ -374,7 +384,7 @@
                                         inputElement.value = item.content_value;
                                     }
                                 });
-                               // showContentMessage("Tải nội dung web hiện tại thành công.", true);
+                                // showContentMessage("Tải nội dung web hiện tại thành công.", true);
                             } else {
                                 throw new Error(contents.message || "Lỗi khi tải nội dung web.");
                             }
