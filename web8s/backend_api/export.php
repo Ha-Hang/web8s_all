@@ -35,11 +35,10 @@ $txt_content .= "ID\tNGÀY NHẬN\t\t\tHỌ TÊN\t\tSĐT\t\tNĂM SINH\tĐỊA CH
 $txt_content .= "------------------------------------------------------------------------------------------------------------------------------------------------\n";
 
 while($row = $result->fetch_assoc()) {
-        // Lấy dữ liệu và thay thế ký tự tab hoặc xuống dòng trong nội dung để không làm hỏng định dạng file
 $row_data = array(
 $row['id'],
  $row['ngay_nhan'],
- str_replace(["\n", "\t"], ' ', $row['ho_ten']),
+str_replace(["\n", "\t"], ' ', $row['ho_ten']),
  $row['sdt'],
  $row['nam_sinh'] ?: '-',
  str_replace(["\n", "\t"], ' ', $row['dia_chi']) ?: '-',

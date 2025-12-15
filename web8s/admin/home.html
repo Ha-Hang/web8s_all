@@ -45,7 +45,7 @@
             <div id="user-list" class="content-view active-view">
                 <h2>📋 Danh sách Người dùng đã gửi thông tin</h2>
                 <div class="table-controls" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm theo Tên, SĐT, Ghi chú..."
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm theo Ngày nhận, Tên, SĐT, Ghi chú..."
                         style="padding: 8px; border: 1px solid #ccc; flex-grow: 1;">
                     <button class="action-btn btn-update" onclick="exportUsersToTxt()">
                         📥 Xuất File TXT
@@ -190,7 +190,7 @@
                         // Lọc mảng allUsers (dữ liệu gốc)
                         const filteredUsers = allUsers.filter(user => {
                             // Chuỗi để tìm kiếm (tìm kiếm trong Tên, SĐT, Ghi chú)
-                            const searchString = `${user.ho_ten} ${user.sdt} ${user.ghi_chu}`.toLowerCase();
+                            const searchString = `${user.ho_ten} ${user.sdt} ${user.ghi_chu} ${user.ngay_nhan}`.toLowerCase();
                             return searchString.includes(searchTerm);
                         });
 
@@ -317,7 +317,7 @@
 
                         try {
                             // GỌI API export_to_txt.php
-                            const response = await fetch(API_BASE_URL + 'export_to_txt.php');
+                            const response = await fetch(API_BASE_URL + 'export.php');
                             const result = await response.json();
 
                             if (response.ok && result.status === true && result.file_url) {
