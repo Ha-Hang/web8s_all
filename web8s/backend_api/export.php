@@ -18,13 +18,13 @@ $table_name = "user";
 $columns = [
     'id'            => ['title' => 'ID', 'width' => 2], 
     'ngay_nhan'     => ['title' => 'NGÀY NHẬN', 'width' => 9], 
-    'ho_ten'        => ['title' => 'HỌ TÊN', 'width' => 6], 
+    'ho_ten'        => ['title' => 'HỌ TÊN', 'width' => 15], 
     'sdt'           => ['title' => 'SĐT', 'width' => 3], 
     'nam_sinh'      => ['title' => 'NĂM SINH', 'width' => 8], 
     'dia_chi'       => ['title' => 'ĐỊA CHỈ', 'width' => 7], 
     'chuong_trinh'  => ['title' => 'CHƯƠNG TRÌNH', 'width' => 12], 
     'quoc_gia'      => ['title' => 'QUỐC GIA', 'width' => 8], 
-    'ghi_chu'       => ['title' => 'GHI CHÚ', 'width' => 7], 
+    'ghi_chu'       => ['title' => 'GHI CHÚ', 'width' => 10], 
 ];
 
 // Hàm tính chiều dài chuỗi tiếng Việt an toàn
@@ -59,8 +59,6 @@ if ($result->num_rows > 0) {
     $all_rows = [];
     $processed_rows = [];
     
-    // SỬA ĐỔI QUAN TRỌNG: Tăng PADDING lên 4 để đảm bảo khoảng trống an toàn
-    // Nếu vẫn lỗi, thử 4.
     $PADDING = 4; 
 
     // -----------------------------------------------------------
@@ -131,7 +129,6 @@ if ($result->num_rows > 0) {
     // In Header cột (Căn lề trái)
     $header_line = '|';
     foreach ($columns as $key => $col) {
-
         $header_line .= str_pad(" " . $col['title'], $col['width'], " ", STR_PAD_RIGHT) . '|';
     }
     $txt_content .= $header_line . "\n";
