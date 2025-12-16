@@ -100,7 +100,7 @@ document.getElementById('userRegistrationForm').addEventListener('submit', funct
         sdt: document.getElementById('sdt').value
     };
 
-    fetch('http://localhost/web8s/backend_api/insert.php', {
+    fetch('/web8s/backend_api/insert.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

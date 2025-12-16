@@ -111,7 +111,8 @@
                 </div>
 
                 <script>
-                    const API_BASE_URL = 'http://localhost/web8s/backend_api/';
+                    const API_BASE_URL = '/web8s/backend_api/';
+                    let allUsers = [];
                     const tableContainer = document.getElementById('userTableContainer');
                     const messageDisplay = document.getElementById('message');
                     const editModal = document.getElementById('editModal');
@@ -166,17 +167,8 @@
                         tableHTML += '<tbody>';
 
                         dataToDisplay.forEach(user => {
-                            const trangThai = user.trang_thai || 'Mới';
+                            
                             const formattedDate = user.ngay_nhan ? new Date(user.ngay_nhan).toLocaleString('vi-VN') : '-';
-
-                            const safeHoTen = (user.ho_ten || '').replace(/'/g, "\\'");
-                            const safeGhiChu = (user.ghi_chu || '').replace(/'/g, "\\'");
-                            const safeDiaChi = (user.dia_chi || '').replace(/'/g, "\\'");
-                            const safeNamSinh = user.nam_sinh || '';
-                            const safeSDT = user.sdt || '';
-                            const safeChuongTrinh = user.chuong_trinh || '';
-                            const safeQuocGia = user.quoc_gia || '';
-                            const safeTrangThai = trangThai.replace(/'/g, "\\'");
 
                             tableHTML += `
             <tr data-id="${user.id}">
@@ -188,26 +180,25 @@
                 <td>${user.dia_chi || '-'}</td>
                 <td>${user.chuong_trinh || '-'}</td>
                 <td>${user.quoc_gia || '-'}</td>
-                
                 <td>${user.ghi_chu || '-'}</td>
-                <td><span class="status-${trangThai.replace(/\s/g, '').toLowerCase()}">${trangThai}</span></td>
+                <td>${user.trang_thai || 'mới'}</td>
 
                 <td>
                     <button class="action-btn btn-update" onclick="openEditModal(
                             ${user.id},
-                            '${safeHoTen}',
-                            '${safeSDT}',
-                            '${safeNamSinh}',
-                            '${safeDiaChi}',
-                            '${safeChuongTrinh}',
-                            '${safeQuocGia}',
-                            '${safeGhiChu}',
-                            '${safeTrangThai}' 
+                            '${user.ho_ten}',
+                            '${user.sdt}',
+                            '${user.nam_sinh}',
+                            '${user.dia_chi}',
+                            '${user.chuong_trinh}',
+                            '${user.quoc_gia}',
+                            '${user.ghi_chu}',
+                            '${user.trang_thai}' 
                         )">Sửa</button>
                     <button class="action-btn btn-delete" onclick="deleteUser(${user.id})">Xóa</button>
                 </td>
             </tr>
-            `; // Đóng tr
+            `; 
                         });
 
                         tableHTML += '</tbody></table>';
@@ -275,7 +266,7 @@
                     // ----------------------------------------------------------------------
 
                     // Mở Modal và điền dữ liệu cũ vào form
-                    function openEditModal(id, ho_ten, sdt, nam_sinh, dia_chi, chuong_trinh, quoc_gia, ghi_chu) {
+                    function openEditModal(id, ho_ten, sdt, nam_sinh, dia_chi, chuong_trinh, quoc_gia, ghi_chu, trang_thai) {
                         document.getElementById('edit-id').value = id;
                         document.getElementById('edit-ho_ten').value = ho_ten;
                         document.getElementById('edit-sdt').value = sdt;
@@ -304,7 +295,7 @@
                     // Xử lý sự kiện khi nhấn nút "LƯU THAY ĐỔI" trong Modal
                     editForm.addEventListener('submit', async function (event) {
                         event.preventDefault();
-
+                        
                         const updatedData = {
                             id: document.getElementById('edit-id').value,
                             ho_ten: document.getElementById('edit-ho_ten').value,
