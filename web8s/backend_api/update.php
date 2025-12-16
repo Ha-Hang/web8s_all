@@ -20,7 +20,6 @@ $chuong_trinh = $data['chuong_trinh'] ?? null;
 $quoc_gia = $data['quoc_gia'] ?? null;
 $sdt = $data['sdt'] ?? null;
 $ghi_chu = $data['ghi_chu'] ?? null;
-$trang_thai = $data['trang_thai'] ?? null;
 
 if (empty($id)) {
     http_response_code(400);
@@ -36,11 +35,11 @@ if ($conn->connect_error) {
 }
 
 $sql = "UPDATE $table_name 
-        SET ho_ten=?, nam_sinh=?, dia_chi=?, chuong_trinh=?, quoc_gia=?, sdt=?, ghi_chu=?, trang_thai=?
+        SET ho_ten=?, nam_sinh=?, dia_chi=?, chuong_trinh=?, quoc_gia=?, sdt=?, ghi_chu=?
         WHERE id=?";
 $stmt = $conn->prepare($sql);
 
-$stmt->bind_param("ssssssssi", $ho_ten, $nam_sinh, $dia_chi, $chuong_trinh, $quoc_gia, $sdt, $ghi_chu, $trang_thai, $id);
+$stmt->bind_param("sssssssi", $ho_ten, $nam_sinh, $dia_chi, $chuong_trinh, $quoc_gia, $sdt, $ghi_chu, $id);
 
 if ($stmt->execute()) {
     http_response_code(200);
@@ -52,4 +51,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-?>
+?>  
